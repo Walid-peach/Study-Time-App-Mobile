@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    app:cardCornerRadius="4dp"
+    android:id="@+id/card_time_slot"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_time_slot"
+            android:text="8:00 - 9:00"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_time_aviable"
+            android:text="Disponible"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:gravity="center_horizontal"
+            />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
