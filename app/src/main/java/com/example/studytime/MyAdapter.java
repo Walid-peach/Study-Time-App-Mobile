@@ -55,7 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull @NotNull MyAdapter.MyViewHolder holder, int position) {
 
         holder.txt_time_slot.setText(Common.converTimeSlotToString(position));
-        holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+
 
     }
 
