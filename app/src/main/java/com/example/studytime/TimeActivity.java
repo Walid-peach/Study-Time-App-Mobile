@@ -54,9 +54,9 @@ public class TimeActivity extends AppCompatActivity implements DatePickerListene
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
         recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
         list = new ArrayList<>();
         myAdapter = new MyAdapter(this, list);
