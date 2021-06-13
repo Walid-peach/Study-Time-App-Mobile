@@ -9,9 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyTime">
-        <activity android:name=".BookingNew"/>
-        <activity android:name=".TimeActivity"/>
-        <activity android:name=".Splashscreen_loading"/>
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".BookingNew" />
+        <activity android:name=".TimeActivity" />
+        <activity android:name=".Splashscreen_loading" />
         <activity android:name=".Booking" />
         <activity android:name=".notif" />
         <activity android:name=".profil" />
@@ -23,11 +30,6 @@
         <activity android:name=".Salle" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
