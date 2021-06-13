@@ -20,13 +20,14 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
-        android:layout_width="408dp"
-        android:layout_height="172dp"
-        android:layout_marginBottom="148dp"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="160dp"
         android:gravity="center"
         android:src="@drawable/studytimetiltlegif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
