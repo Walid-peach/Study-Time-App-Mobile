@@ -47,7 +47,7 @@ public class Booking extends AppCompatActivity {
         this.activity=this;
 
         txt = findViewById(R.id.textNom_du_salle);
-        txt.setText(Salle.setChosen());
+        txt.setText("La Salle "+ Salle.setChosen());
 
         //Toast.makeText(Booking.this,"lalalalala", Toast.LENGTH_LONG).show();
         List<String> salles = new ArrayList<>();
@@ -55,7 +55,7 @@ public class Booking extends AppCompatActivity {
 
 
 
-        Log.d("My activity", "Salle : " +salles);
+        //Log.d("My activity", "Salle : " +salles);
         //txttest= salles.get(0);
         //Toast.makeText(Booking.this,"something went wrong! Try again", Toast.LENGTH_LONG).show();
 
