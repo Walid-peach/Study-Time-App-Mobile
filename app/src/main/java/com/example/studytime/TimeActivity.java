@@ -61,12 +61,7 @@ public class TimeActivity extends AppCompatActivity implements DatePickerListene
         list = new ArrayList<>();
         myAdapter = new MyAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
-
-        list.add("lalalala");
-        list.add("lalalala");
-        list.add("lalalala");
-        list.add("lalalala");
-
+        
 
 
     }
