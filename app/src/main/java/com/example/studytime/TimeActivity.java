@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +24,8 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 
 public class TimeActivity extends AppCompatActivity implements DatePickerListener {
+
+
 
     RecyclerView recyclerView;
     MyAdapter myAdapter;
@@ -52,23 +56,38 @@ public class TimeActivity extends AppCompatActivity implements DatePickerListene
         picker.setDate(new DateTime().plusDays(0));
 
 
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
-        list = new ArrayList<>();
-        myAdapter = new MyAdapter(this, list);
-        recyclerView.setAdapter(myAdapter);
-        
+
 
 
     }
 
     @Override
     public void onDateSelected(DateTime dateSelected) {
+
         Log.i("HorizontalPicker", "Selected date is " + dateSelected.toString());
+
+        LoadTime();
+
+    }
+
+    private void LoadTime() {
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+
+
+
+        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
+
+        list = new ArrayList<>();
+        myAdapter = new MyAdapter(this, list);
+        recyclerView.setAdapter(myAdapter);
+
     }
 
 }

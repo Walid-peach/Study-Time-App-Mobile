@@ -56,7 +56,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         holder.txt_time_slot.setText(Common.converTimeSlotToString(position));
 
-
     }
 
     @Override
