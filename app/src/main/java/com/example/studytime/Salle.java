@@ -61,20 +61,20 @@ public class Salle extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(setChosen()!="choisisser une Salle"){
+                if(setChosen()!="Veuillez choisir une Salle"){
                     Intent i = new Intent(Salle.this, GroupSolo.class);
                     i.putExtra("city",setChosen());
                     startActivity(i);
                 }
                 else {
-                    Toast.makeText(Salle.this,"Veuillez choisir une salle", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Salle.this,"Veuillez choisir une Salle", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
         Spinner spinner =  findViewById(R.id.spinner);
         List<String> salles = new ArrayList<>();
-        salles.add("choisisser une Salle");
+        salles.add("Veuillez choisir une Salle");
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,salles);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);

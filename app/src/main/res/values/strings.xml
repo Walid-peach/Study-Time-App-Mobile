@@ -8,4 +8,14 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+
+    <string-array name="departement">
+        <item>Informatique</item>
+        <item>Mines</item>
+        <item>Electromécanique</item>
+        <item>Sciences de la terre</item>
+        <item>Génie des Procédés Industriels</item>
+        <item>Génie des Matériaux</item>
+    </string-array>
+
 </resources>

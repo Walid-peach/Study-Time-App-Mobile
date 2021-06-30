@@ -16,18 +16,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/image2" />
+
     <EditText
         android:id="@+id/fullname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="94dp"
         android:layout_marginLeft="94dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="109dp"
         android:layout_marginRight="109dp"
         android:ems="10"
 
-        android:hint=" Nom et prénom"
+        android:hint=" Nom et prenom"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -72,40 +73,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/age"
-        android:layout_width="210dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginLeft="94dp"
-
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginRight="114dp"
-        android:ems="10"
-        android:hint=" Age"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullname" />
-
-    <EditText
         android:id="@+id/email2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="94dp"
         android:layout_marginLeft="94dp"
 
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginRight="108dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginRight="109dp"
         android:ems="10"
-        android:hint=" Adresse Eamil"
+        android:hint=" Adresse e-mail"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <EditText
         android:id="@+id/Password2"
@@ -113,9 +96,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="94dp"
         android:layout_marginLeft="94dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="107dp"
-        android:layout_marginRight="107dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginRight="109dp"
         android:ems="10"
         android:hint=" Mot de passe"
         android:inputType="textPassword"
@@ -140,5 +123,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="214dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginLeft="94dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginRight="109dp"
+        android:entries="@array/departement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullname" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

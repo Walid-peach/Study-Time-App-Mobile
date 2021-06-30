@@ -37,16 +37,16 @@
 
     <TextView
         android:id="@+id/fullNameTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="145dp"
+        android:layout_height="33dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="320dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Nom :"
+        android:text="Nom et Prénom :"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintHorizontal_bias="0.152"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,12 +54,12 @@
         android:id="@+id/fullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="320dp"
 
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.613"
         app:layout_constraintStart_toEndOf="@+id/fullNameTitle"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,10 +82,10 @@
         android:layout_marginTop="380dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Age :"
+        android:text="Département :"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,7 +99,7 @@
         android:text=""
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.412"
+        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toEndOf="@+id/ageTitle"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,10 +108,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="452dp"
+        android:layout_marginTop="440dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Email :"
+        android:text="E-mail :"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.112"
@@ -122,7 +122,7 @@
         android:id="@+id/emailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="452dp"
+        android:layout_marginTop="440dp"
 
         android:fontFamily="sans-serif-condensed-medium"
         android:text=""

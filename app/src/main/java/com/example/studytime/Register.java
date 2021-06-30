@@ -1,15 +1,18 @@
 package com.example.studytime;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,23 +22,48 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth mAuth;
-    private EditText name,age_,email_,mdp;
-    private Button enregistrer;
+    private EditText name,email_,mdp;
+    private Button enregister;
+    private static String chosen;
+    public static String  setChosen() {
+        return chosen;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        mAuth = FirebaseAuth.getInstance();
 
-        enregistrer = (Button) findViewById(R.id.enregister);
-        enregistrer.setOnClickListener(this);
+
+
+        setContentView(R.layout.activity_register);
+
+        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.departement, android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String spinnerValue = parent.getItemAtPosition(position).toString();
+
+                Toast.makeText(getBaseContext(),  spinnerValue, Toast.LENGTH_SHORT).show();
+                chosen = spinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        mAuth = FirebaseAuth.getInstance();
+        enregister = (Button) findViewById(R.id.enregister);
+        enregister.setOnClickListener(this);
 
         name = (EditText) findViewById(R.id.fullname);
-        age_= (EditText) findViewById(R.id.age);
         email_ = (EditText) findViewById(R.id.email2);
         mdp = (EditText) findViewById(R.id.Password2);
-
-
 
 
     }
@@ -46,22 +74,28 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+
+
     private void registerUser() {
             String email= email_.getText().toString().trim();
             String password = mdp.getText().toString().trim();
             String fullname = name.getText().toString().trim();
-            String age = age_.getText().toString().trim();
+
+
 
             if(fullname.isEmpty()){
                 name.setError("champs est vide!");
                 name.requestFocus();
                 return;
             }
-            if(age.isEmpty()){
-                age_.setError("champs est vide!");
-                age_.requestFocus();
+
+            if(chosen.isEmpty()){
+                name.setError("champs est vide!");
+                name.requestFocus();
                 return;
             }
+
+
             if(email.isEmpty()){
                 email_.setError("champs est vide!");
                 email_.requestFocus();
@@ -88,7 +122,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Users users = new Users(fullname,age,email);
+                                Users users = new Users(fullname,chosen,email);
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

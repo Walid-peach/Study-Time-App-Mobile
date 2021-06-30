@@ -6,31 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".Booking">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="112dp"
-        android:layout_height="126dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        android:gravity="right"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/image2" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="16dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_power"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/poweronoff" />
+    </LinearLayout>
 
 
     <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/gridLayout"
+        android:layout_width="397dp"
+        android:layout_height="461dp"
         android:layout_margin="10sp"
-        android:layout_marginBottom="52dp"
         android:columnCount="2"
         android:rowCount="5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="9dp">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="6dp">
 
         <Button
             android:id="@+id/table1"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
             android:text="Table 1"
@@ -39,86 +51,86 @@
 
         <Button
             android:id="@+id/table2"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_row="0"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 2"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table3"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 3"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table4"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 4"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table5"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
+
             android:text="Table 5"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table6"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 6"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table7"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 7"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table8"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 8"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table9"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 9"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
         <Button
             android:id="@+id/table10"
-            android:layout_height="100sp"
+            android:layout_height="80sp"
             android:layout_columnWeight="1"
             android:layout_margin="5sp"
-            app:backgroundTint="#3F51B5"
             android:text="Table 10"
-            android:textSize="18sp" />
-
+            android:textSize="18sp"
+            app:backgroundTint="#3F51B5" />
 
     </GridLayout>
 
@@ -126,12 +138,35 @@
         android:id="@+id/textNom_du_salle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:gravity="center"
         android:textColor="@color/bleu_2"
         android:textSize="24sp"
         android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_home"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/homebutton" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

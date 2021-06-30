@@ -26,6 +26,8 @@ import java.util.ArrayList;
 public class TimeActivity extends AppCompatActivity implements DatePickerListener {
 
 
+    public static String date;
+    TimeActivity activity;
 
     RecyclerView recyclerView;
     MyAdapter myAdapter;
@@ -65,10 +67,15 @@ public class TimeActivity extends AppCompatActivity implements DatePickerListene
     @Override
     public void onDateSelected(DateTime dateSelected) {
 
-        Log.i("HorizontalPicker", "Selected date is " + dateSelected.toString());
-
+        date = dateSelected.toString();
+        //Log.i("HorizontalPicker", "Selected date is " + dateSelected.toString());
+        setDate();
         LoadTime();
 
+    }
+
+    public static String setDate() {
+        return date;
     }
 
     private void LoadTime() {
@@ -79,14 +86,13 @@ public class TimeActivity extends AppCompatActivity implements DatePickerListene
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-
-
-
         recyclerView.addItemDecoration(new SpacesItemDecoration(8));
 
         list = new ArrayList<>();
         myAdapter = new MyAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
+        Log.i("HorizontalPicker", "the ID is " + date +Booking.getPlace()+Booking.getTable()+Salle.setChosen());
+
 
     }
 
