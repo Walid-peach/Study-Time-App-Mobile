@@ -240,12 +240,23 @@ dart pub global activate flutterfire_cli
 # 5. Log into Firebase
 firebase login
 
-# 6. Inside this repo — connect to your existing Firebase project
+# 6. Create Firebase project + connect to this repo
+firebase projects:create studytime-walid --display-name "StudyTime"
 cd /path/to/this/repo
-flutterfire configure
+flutterfire configure --project=studytime-walid
 ```
 
 When `flutter doctor` is green and `flutterfire configure` has finished, come back — Phase 1 starts from here.
+
+**Status (May 2026):**
+- ✅ Homebrew installed at `/opt/homebrew`
+- ✅ Flutter 3.41.9 installed
+- ✅ Firebase CLI 15.17.0 installed
+- ✅ FlutterFire CLI 1.3.2 installed
+- ✅ `firebase login` done (account: wal.elkhoukh@gmail.com)
+- ✅ Firebase project `studytime-walid` created (Android + iOS apps registered)
+- ⚠️ `flutterfire configure` crashed on xcodeproj Ruby gem — fix: `sudo gem install xcodeproj` then re-run configure
+- ⬜ `firebase_options.dart` not yet generated (blocks `flutter analyze`)
 
 ---
 
@@ -254,13 +265,13 @@ When `flutter doctor` is green and `flutterfire configure` has finished, come ba
 **Goal:** Flutter project initialised in this repo, compiles and runs with the correct theme and routing skeleton.
 
 **Tasks:**
-- [ ] Archive existing Kotlin code → `android_legacy/` folder
-- [ ] Run `flutter create . --org com.walidelkhoukh` at repo root
-- [ ] Update `pubspec.yaml` with all dependencies
-- [ ] Create `lib/core/theme/app_theme.dart` — full color palette + MaterialTheme
-- [ ] Create `lib/core/router/app_router.dart` — all routes defined (screens as stubs)
-- [ ] Create `lib/main.dart` — `ProviderScope` + `Firebase.initializeApp()` + `MaterialApp.router`
-- [ ] `flutter pub get` + `flutter analyze` → zero errors
+- [x] Archive existing Kotlin code → `android_legacy/` folder
+- [x] Run `flutter create . --org com.walidelkhoukh --project-name studytime` at repo root
+- [x] Update `pubspec.yaml` with all dependencies
+- [x] Create `lib/core/theme/app_theme.dart` — full color palette + MaterialTheme
+- [x] Create `lib/core/router/app_router.dart` — all routes defined (screens as stubs)
+- [x] Create `lib/main.dart` — `ProviderScope` + `Firebase.initializeApp()` + `MaterialApp.router`
+- [ ] `flutter pub get` + `flutter analyze` → zero errors ⚠️ blocked by missing `firebase_options.dart`
 
 **Done when:** `flutter run` shows a blank screen with the correct blue theme and no errors.
 
@@ -271,22 +282,23 @@ When `flutter doctor` is green and `flutterfire configure` has finished, come ba
 **Goal:** All models and repositories exist in Dart, compile cleanly, and mirror the Kotlin originals exactly.
 
 **Tasks:**
-- [ ] Port `User` → `lib/data/models/user.dart` (with `fromJson` / `toJson`)
-- [ ] Port `Booking` → `lib/data/models/booking.dart` (same fields + `STATUS_ACTIVE` / `STATUS_CANCELLED` constants)
-- [ ] Port `StudyHall` → `lib/data/models/study_hall.dart`
-- [ ] Port `TimeSlot` → `lib/data/models/time_slot.dart` (in-memory only, no Firestore)
-- [ ] Port `UserProfileUpdate` → `lib/data/models/user_profile_update.dart`
-- [ ] Port `AuthRepository` → `lib/data/repositories/auth_repository.dart`
+- [x] Port `User` → `lib/data/models/user.dart` (with `fromJson` / `toJson`)
+- [x] Port `Booking` → `lib/data/models/booking.dart` (same fields + `statusActive` / `statusCancelled` constants)
+- [x] Port `StudyHall` → `lib/data/models/study_hall.dart`
+- [x] Port `TimeSlot` → `lib/data/models/time_slot.dart` (in-memory only + `generateDay()` helper)
+- [x] Port `UserProfileUpdate` → `lib/data/models/user_profile_update.dart`
+- [x] Port `AuthRepository` → `lib/data/repositories/auth_repository.dart`
   - `login()`, `register()`, `sendPasswordReset()`, `signOut()`, `currentUser`
-- [ ] Port `UserRepository` → `lib/data/repositories/user_repository.dart`
+- [x] Port `UserRepository` → `lib/data/repositories/user_repository.dart`
   - `createUser()`, `getUser()`, `updateProfile()`
-- [ ] Port `BookingRepository` → `lib/data/repositories/booking_repository.dart`
+- [x] Port `BookingRepository` → `lib/data/repositories/booking_repository.dart`
   - `createBooking()` with Firestore transaction + slot-lock
   - `getUserBookings()`, `cancelBooking()` (deletes slot-lock in transaction)
-- [ ] Port `StudyHallRepository` → `lib/data/repositories/study_hall_repository.dart`
+- [x] Port `StudyHallRepository` → `lib/data/repositories/study_hall_repository.dart`
   - `getHalls()`, `getBookedSlots()`
-- [ ] Create `lib/core/utils/validators.dart` — email, password, required, passwords-match
-- [ ] `flutter analyze` → zero errors
+- [x] Create `lib/core/utils/validators.dart` — email, password, required, passwords-match
+- [x] Riverpod `.g.dart` files generated via `build_runner`
+- [ ] `flutter analyze` → zero errors ⚠️ blocked by missing `firebase_options.dart`
 
 **Done when:** All repositories compile. No UI yet.
 
@@ -413,11 +425,21 @@ When `flutter doctor` is green and `flutterfire configure` has finished, come ba
 
 | Phase | Status | Notes |
 |---|---|---|
-| Phase 0 — Prerequisites | ⏳ Waiting | Install Flutter + FlutterFire CLI |
-| Phase 1 — Bootstrap | ⬜ Not started | |
-| Phase 2 — Data Layer | ⬜ Not started | |
+| Phase 0 — Prerequisites | ⚠️ Blocked | `sudo gem install xcodeproj` then re-run `flutterfire configure` |
+| Phase 1 — Bootstrap | ⚠️ Blocked | All files done — waiting on `firebase_options.dart` to unblock analyze |
+| Phase 2 — Data Layer | ⚠️ Blocked | All files + build_runner done — same blocker as Phase 1 |
 | Phase 3 — Auth Flow | ⬜ Not started | |
 | Phase 4 — Dashboard | ⬜ Not started | |
 | Phase 5 — Booking Flow | ⬜ Not started | |
 | Phase 6 — My Bookings + Profile | ⬜ Not started | |
 | Phase 7 — Polish | ⬜ Not started | |
+
+### Next action
+Run in your terminal:
+```bash
+sudo gem install xcodeproj
+export PATH="$PATH:$HOME/.pub-cache/bin"
+cd /Users/walidelkhoukh/Desktop/Study-Time-App-Mobile
+flutterfire configure --project=studytime-walid
+```
+Once `lib/firebase_options.dart` exists → Phases 0, 1, 2 close and Phase 3 (Auth Flow) begins.
