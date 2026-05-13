@@ -14,14 +14,16 @@ class AuthRepository @Inject constructor(private val auth: FirebaseAuth) {
 
     suspend fun login(email: String, password: String): Resource<FirebaseUser> = try {
         val result = auth.signInWithEmailAndPassword(email, password).await()
-        Resource.Success(result.user!!)
+        val user = result.user ?: return Resource.Error("Login succeeded but user is null")
+        Resource.Success(user)
     } catch (e: Exception) {
         Resource.Error(e.message ?: "Login failed")
     }
 
     suspend fun register(email: String, password: String): Resource<FirebaseUser> = try {
         val result = auth.createUserWithEmailAndPassword(email, password).await()
-        Resource.Success(result.user!!)
+        val user = result.user ?: return Resource.Error("Registration succeeded but user is null")
+        Resource.Success(user)
     } catch (e: Exception) {
         Resource.Error(e.message ?: "Registration failed")
     }
