@@ -13,7 +13,7 @@ Stream<User?> authStateChanges(Ref ref) =>
 // Bridges the Riverpod auth stream into a Listenable GoRouter can watch.
 class RouterNotifier extends ChangeNotifier {
   RouterNotifier(this._ref) {
-    _ref.listen<AsyncValue<User?>>(authStateChangesProvider, (_, __) {
+    _ref.listen<AsyncValue<User?>>(authStateChangesProvider, (prev, next) {
       notifyListeners();
     });
   }
