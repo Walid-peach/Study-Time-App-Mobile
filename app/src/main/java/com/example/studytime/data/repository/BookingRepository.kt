@@ -14,10 +14,25 @@ class BookingRepository @Inject constructor(private val db: FirebaseFirestore) {
 
     private fun bookingsCollection() = db.collection("bookings")
 
+    // Uses a slot-lock document in `bookedSlots/{key}` as a mutex.
+    // The transaction reads the lock doc and writes both the lock and the booking atomically,
+    // so two concurrent requests for the same seat/slot can't both succeed.
     suspend fun createBooking(booking: Booking): Resource<String> = try {
-        val data = booking.copy(createdAt = Timestamp.now())
-        val ref = bookingsCollection().add(data).await()
-        Resource.Success(ref.id)
+        val slotKey = "${booking.hallId}_t${booking.tableNumber}_s${booking.seatNumber}_${booking.date}_h${booking.startHour}"
+        val slotRef = db.collection("bookedSlots").document(slotKey)
+        val bookingRef = bookingsCollection().document()
+        val bookingData = booking.copy(createdAt = Timestamp.now())
+
+        db.runTransaction { tx ->
+            val slotSnap = tx.get(slotRef)
+            if (slotSnap.exists()) {
+                throw Exception("This seat and time slot is already booked.")
+            }
+            tx.set(slotRef, mapOf("bookingId" to bookingRef.id, "createdAt" to Timestamp.now()))
+            tx.set(bookingRef, bookingData)
+        }.await()
+
+        Resource.Success(bookingRef.id)
     } catch (e: Exception) {
         Resource.Error(e.message ?: "Could not create booking")
     }
@@ -36,8 +51,15 @@ class BookingRepository @Inject constructor(private val db: FirebaseFirestore) {
     }
 
     suspend fun cancelBooking(bookingId: String): Resource<Unit> = try {
-        bookingsCollection().document(bookingId)
-            .update("status", Booking.STATUS_CANCELLED).await()
+        val bookingRef = bookingsCollection().document(bookingId)
+        val booking = bookingRef.get().await().toObject(Booking::class.java)
+            ?: throw Exception("Booking not found")
+        val slotKey = "${booking.hallId}_t${booking.tableNumber}_s${booking.seatNumber}_${booking.date}_h${booking.startHour}"
+        val slotRef = db.collection("bookedSlots").document(slotKey)
+        db.runTransaction { tx ->
+            tx.update(bookingRef, "status", Booking.STATUS_CANCELLED)
+            tx.delete(slotRef)
+        }.await()
         Resource.Success(Unit)
     } catch (e: Exception) {
         Resource.Error(e.message ?: "Could not cancel booking")

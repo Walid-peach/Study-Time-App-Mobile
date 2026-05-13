@@ -25,11 +25,12 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             _registerState.value = Resource.Loading
             val authResult = authRepo.register(email, password)
-            if (authResult is Resource.Error) {
-                _registerState.value = authResult
+            if (authResult !is Resource.Success) {
+                _registerState.value = if (authResult is Resource.Error) authResult
+                                       else Resource.Error("Registration failed")
                 return@launch
             }
-            val uid = (authResult as Resource.Success).data.uid
+            val uid = authResult.data.uid
             val user = User(uid = uid, fullName = fullName, email = email, department = department)
             _registerState.value = userRepo.createUser(user)
         }

@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.studytime.R
-import com.example.studytime.data.repository.AuthRepository
 import com.example.studytime.databinding.FragmentResetPasswordBinding
 import com.example.studytime.utils.Resource
 import com.example.studytime.utils.gone
@@ -18,9 +17,7 @@ import com.example.studytime.utils.trimText
 import com.example.studytime.utils.visible
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ResetPasswordFragment : Fragment() {
@@ -28,8 +25,7 @@ class ResetPasswordFragment : Fragment() {
     private var _binding: FragmentResetPasswordBinding? = null
     private val binding get() = _binding!!
 
-    @Inject lateinit var authRepo: AuthRepository
-    private val resetState = MutableStateFlow<Resource<Unit>?>(null)
+    private val viewModel: ResetPasswordViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
@@ -46,16 +42,13 @@ class ResetPasswordFragment : Fragment() {
                 return@setOnClickListener
             }
             binding.tilEmail.setError(null)
-            viewLifecycleOwner.lifecycleScope.launch {
-                resetState.value = Resource.Loading
-                resetState.value = authRepo.sendPasswordReset(email)
-            }
+            viewModel.sendPasswordReset(email)
         }
 
         binding.tvBackToLogin.setOnClickListener { findNavController().navigateUp() }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            resetState.collect { state ->
+            viewModel.resetState.collect { state ->
                 when (state) {
                     is Resource.Loading -> {
                         binding.progressBar.visible()

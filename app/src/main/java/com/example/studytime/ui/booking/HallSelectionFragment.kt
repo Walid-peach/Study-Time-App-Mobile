@@ -34,6 +34,7 @@ class HallSelectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.resetSelection()
         binding.recyclerHalls.adapter = adapter
 
         binding.swipeRefresh.setOnRefreshListener { viewModel.loadHalls() }
