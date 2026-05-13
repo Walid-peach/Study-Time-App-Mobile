@@ -20,21 +20,6 @@ class StudyHallRepository @Inject constructor(private val db: FirebaseFirestore)
         Resource.Error(e.message ?: "Could not load study halls")
     }
 
-    suspend fun getBookedSeats(hallId: String, tableNumber: Int, date: String): Resource<Set<Int>> = try {
-        val snapshot = db.collection("bookings")
-            .whereEqualTo("hallId", hallId)
-            .whereEqualTo("tableNumber", tableNumber)
-            .whereEqualTo("date", date)
-            .whereEqualTo("status", "active")
-            .get().await()
-        val booked = snapshot.documents.mapNotNull {
-            it.getLong("seatNumber")?.toInt()
-        }.toSet()
-        Resource.Success(booked)
-    } catch (e: Exception) {
-        Resource.Error(e.message ?: "Could not check availability")
-    }
-
     suspend fun getBookedSlots(hallId: String, tableNumber: Int, seatNumber: Int, date: String): Resource<Set<Int>> = try {
         val snapshot = db.collection("bookings")
             .whereEqualTo("hallId", hallId)

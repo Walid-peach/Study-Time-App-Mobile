@@ -31,13 +31,15 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onStart() {
+        super.onStart()
         if (viewModel.isLoggedIn()) {
             findNavController().navigate(R.id.action_login_to_dashboard)
-            return
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener { attemptLogin() }
         binding.tvForgotPassword.setOnClickListener {
