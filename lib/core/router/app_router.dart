@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../features/auth/login/login_screen.dart';
+import '../../features/auth/register/register_screen.dart';
+import '../../features/auth/reset_password/reset_password_screen.dart';
 
-// Stub screens — replaced in later phases
 class _StubScreen extends StatelessWidget {
   final String title;
   const _StubScreen(this.title);
@@ -27,9 +29,9 @@ final appRouter = GoRouter(
     return null;
   },
   routes: [
-    GoRoute(path: '/login', builder: (ctx, _) => const _StubScreen('Login')),
-    GoRoute(path: '/register', builder: (ctx, _) => const _StubScreen('Register')),
-    GoRoute(path: '/reset-password', builder: (ctx, _) => const _StubScreen('Reset Password')),
+    GoRoute(path: '/login', builder: (ctx, _) => const LoginScreen()),
+    GoRoute(path: '/register', builder: (ctx, _) => const RegisterScreen()),
+    GoRoute(path: '/reset-password', builder: (ctx, _) => const ResetPasswordScreen()),
     GoRoute(path: '/dashboard', builder: (ctx, _) => const _StubScreen('Dashboard')),
     GoRoute(path: '/booking/halls', builder: (ctx, _) => const _StubScreen('Hall Selection')),
     GoRoute(path: '/booking/table', builder: (ctx, _) => const _StubScreen('Table Selection')),

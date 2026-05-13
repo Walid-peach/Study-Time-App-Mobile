@@ -425,9 +425,9 @@ When `flutter doctor` is green and `flutterfire configure` has finished, come ba
 
 | Phase | Status | Notes |
 |---|---|---|
-| Phase 0 — Prerequisites | ⚠️ Blocked | `sudo gem install xcodeproj` then re-run `flutterfire configure` |
-| Phase 1 — Bootstrap | ⚠️ Blocked | All files done — waiting on `firebase_options.dart` to unblock analyze |
-| Phase 2 — Data Layer | ⚠️ Blocked | All files + build_runner done — same blocker as Phase 1 |
+| Phase 0 — Prerequisites | ✅ Done | Flutter 3.41.9, Firebase CLI, FlutterFire CLI, project `studytime-walid` |
+| Phase 1 — Bootstrap | ✅ Done | `flutter analyze` → zero issues |
+| Phase 2 — Data Layer | ✅ Done | All models + repositories + build_runner, `flutter analyze` → zero issues |
 | Phase 3 — Auth Flow | ⬜ Not started | |
 | Phase 4 — Dashboard | ⬜ Not started | |
 | Phase 5 — Booking Flow | ⬜ Not started | |
@@ -435,11 +435,4 @@ When `flutter doctor` is green and `flutterfire configure` has finished, come ba
 | Phase 7 — Polish | ⬜ Not started | |
 
 ### Next action
-Run in your terminal:
-```bash
-sudo gem install xcodeproj
-export PATH="$PATH:$HOME/.pub-cache/bin"
-cd /Users/walidelkhoukh/Desktop/Study-Time-App-Mobile
-flutterfire configure --project=studytime-walid
-```
-Once `lib/firebase_options.dart` exists → Phases 0, 1, 2 close and Phase 3 (Auth Flow) begins.
+**Phase 3 — Auth Flow** (Login, Register, Reset Password screens + providers)
