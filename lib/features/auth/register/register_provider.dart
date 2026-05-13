@@ -20,12 +20,19 @@ class RegisterNotifier extends _$RegisterNotifier {
     state = await AsyncValue.guard(() async {
       final firebaseUser =
           await ref.read(authRepositoryProvider).register(email, password);
-      await ref.read(userRepositoryProvider).createUser(AppUser(
-            uid: firebaseUser.uid,
-            fullName: fullName,
-            email: email,
-            department: department,
-          ));
+      try {
+        await ref.read(userRepositoryProvider).createUser(AppUser(
+              uid: firebaseUser.uid,
+              fullName: fullName,
+              email: email,
+              department: department,
+            ));
+      } catch (_) {
+        // Roll back the Auth account so the user is not left in a broken state
+        // where they can log in but have no Firestore profile doc.
+        await firebaseUser.delete();
+        rethrow;
+      }
     });
   }
 }

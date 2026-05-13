@@ -32,7 +32,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(loginNotifierProvider, (_, next) {
+    ref.listen(loginNotifierProvider, (previous, next) {
+      if (previous?.isLoading != true) return;
       next.whenOrNull(
         error: (e, _) => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(e.toString()))),

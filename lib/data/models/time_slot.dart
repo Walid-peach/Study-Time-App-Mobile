@@ -28,7 +28,7 @@ class TimeSlot {
     return List.generate(14, (i) {
       final hour = 8 + i;
       final suffix = hour < 12 ? 'AM' : 'PM';
-      final display = hour <= 12 ? hour : hour - 12;
+      final display = hour % 12 == 0 ? 12 : hour % 12;
       return TimeSlot(
         id: 'slot_$hour',
         label: '$display:00 $suffix',

@@ -31,7 +31,8 @@ class _ResetPasswordScreenState extends ConsumerState<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(resetPasswordNotifierProvider, (_, next) {
+    ref.listen(resetPasswordNotifierProvider, (previous, next) {
+      if (previous?.isLoading != true) return;
       next.whenOrNull(
         error: (e, _) => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(e.toString()))),

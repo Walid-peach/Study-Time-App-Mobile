@@ -11,14 +11,14 @@ void main() async {
   runApp(const ProviderScope(child: StudyTimeApp()));
 }
 
-class StudyTimeApp extends StatelessWidget {
+class StudyTimeApp extends ConsumerWidget {
   const StudyTimeApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
+  Widget build(BuildContext context, WidgetRef ref) => MaterialApp.router(
         title: 'StudyTime',
         theme: AppTheme.light,
-        routerConfig: appRouter,
+        routerConfig: ref.watch(appRouterProvider),
         debugShowCheckedModeBanner: false,
       );
 }

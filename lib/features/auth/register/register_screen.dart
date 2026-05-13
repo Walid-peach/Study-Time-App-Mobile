@@ -41,7 +41,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(registerNotifierProvider, (_, next) {
+    ref.listen(registerNotifierProvider, (previous, next) {
+      if (previous?.isLoading != true) return;
       next.whenOrNull(
         error: (e, _) => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(e.toString()))),

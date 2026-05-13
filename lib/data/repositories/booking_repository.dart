@@ -49,15 +49,21 @@ class BookingRepository {
 
   Future<void> cancelBooking(String bookingId) async {
     final bookingRef = _bookings.doc(bookingId);
-    final snap = await bookingRef.get();
-    final data = snap.data();
-    if (data == null) throw Exception('Booking not found');
-    final booking = Booking.fromJson(data, id: bookingId);
-    final slotKey =
-        '${booking.hallId}_t${booking.tableNumber}_s${booking.seatNumber}_${booking.date}_h${booking.startHour}';
-    final slotRef = _db.collection('bookedSlots').doc(slotKey);
 
     await _db.runTransaction((tx) async {
+      final snap = await tx.get(bookingRef);
+      final data = snap.data();
+      if (data == null) throw Exception('Booking not found');
+
+      final booking = Booking.fromJson(data, id: bookingId);
+      if (booking.status == Booking.statusCancelled) {
+        throw Exception('Booking is already cancelled.');
+      }
+
+      final slotKey =
+          '${booking.hallId}_t${booking.tableNumber}_s${booking.seatNumber}_${booking.date}_h${booking.startHour}';
+      final slotRef = _db.collection('bookedSlots').doc(slotKey);
+
       tx.update(bookingRef, {'status': Booking.statusCancelled});
       tx.delete(slotRef);
     });
