@@ -1,7 +1,9 @@
 package com.example.studytime.data.model
 
+import androidx.annotation.Keep
 import com.google.firebase.Timestamp
 
+@Keep
 data class Booking(
     val id: String = "",
     val userId: String = "",

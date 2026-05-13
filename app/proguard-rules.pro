@@ -1,4 +1,15 @@
 # Add project specific ProGuard rules here.
+
+# Keep all Firestore data model classes so field names are not obfuscated
+-keep class com.example.studytime.data.model.** { *; }
+
+# Keep Firebase / Firestore classes
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+
+# Preserve stack traces in crash reports
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
 #

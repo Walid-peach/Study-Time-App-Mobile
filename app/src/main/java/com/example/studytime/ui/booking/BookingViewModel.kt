@@ -66,11 +66,14 @@ class BookingViewModel @Inject constructor(
 
     private fun generateTimeSlots(bookedHours: Set<Int>): List<TimeSlot> {
         return (8..21).map { hour ->
-            val amPm = if (hour < 12) "AM" else "PM"
-            val display = if (hour <= 12) hour else hour - 12
+            val startDisplay = if (hour <= 12) hour else hour - 12
+            val startAmPm = if (hour < 12) "AM" else "PM"
+            val endHour = hour + 1
+            val endDisplay = if (endHour <= 12) endHour else endHour - 12
+            val endAmPm = if (endHour < 12) "AM" else "PM"
             TimeSlot(
                 id = hour.toString(),
-                label = "$display:00 $amPm – ${if (hour + 1 <= 12) hour + 1 else hour - 11}:00 ${if (hour + 1 < 12) "AM" else "PM"}",
+                label = "$startDisplay:00 $startAmPm – $endDisplay:00 $endAmPm",
                 startHour = hour,
                 startMinute = 0,
                 durationMinutes = 60,
