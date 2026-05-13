@@ -1,31 +1,51 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+*.g.dart
+
+# Riverpod generated files that should be committed are *.g.dart inside lib/
+# Override: track generated provider files
+!lib/**/*.g.dart
+
+# pubspec.lock — commit for apps, ignore for packages
+# (kept for reproducible builds)
+
+# Firebase — never commit
+google-services.json
+GoogleService-Info.plist
+
 # Android build artefacts
 *.iml
 .gradle/
 /local.properties
 local.properties
-/build/
-app/build/
 /captures/
 .externalNativeBuild/
 .cxx/
+android/local.properties
 
-# IntelliJ / Android Studio
+# iOS build artefacts
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+# IntelliJ / Android Studio / VS Code
 /.idea/caches/
-/.idea/libraries/
-/.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+.vscode/
 *.orig
-
-# Firebase — never commit
-google-services.json
-
-# Notes
-notes/
 
 # macOS
 .DS_Store
+
+# Notes
+notes/
 
 # Keystore — never commit signing keys
 *.jks
