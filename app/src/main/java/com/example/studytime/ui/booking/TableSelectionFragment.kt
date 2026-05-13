@@ -87,10 +87,18 @@ class TableSelectionFragment : Fragment() {
     }
 
     private fun showDatePicker() {
+        val validators = com.google.android.material.datepicker.CompositeDateValidator.allOf(
+            listOf(com.google.android.material.datepicker.DateValidatorPointForward.now())
+        )
         val picker = com.google.android.material.datepicker.MaterialDatePicker.Builder
             .datePicker()
             .setTitleText(getString(R.string.select_date))
             .setSelection(com.google.android.material.datepicker.MaterialDatePicker.todayInUtcMilliseconds())
+            .setCalendarConstraints(
+                com.google.android.material.datepicker.CalendarConstraints.Builder()
+                    .setValidator(validators)
+                    .build()
+            )
             .build()
         picker.addOnPositiveButtonClickListener { millis ->
             val date = java.time.Instant.ofEpochMilli(millis)

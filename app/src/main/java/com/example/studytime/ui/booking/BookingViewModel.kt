@@ -105,4 +105,13 @@ class BookingViewModel @Inject constructor(
     }
 
     fun resetConfirmState() { _confirmState.value = null }
+
+    fun resetSelection() {
+        selectedHall = null
+        selectedTable = 0
+        selectedSeat = 0
+        selectedDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+        selectedTimeSlot = null
+        _confirmState.value = null
+    }
 }
