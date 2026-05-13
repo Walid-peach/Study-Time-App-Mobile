@@ -428,11 +428,11 @@ When `flutter doctor` is green and `flutterfire configure` has finished, come ba
 | Phase 0 — Prerequisites | ✅ Done | Flutter 3.41.9, Firebase CLI, FlutterFire CLI, project `studytime-walid` |
 | Phase 1 — Bootstrap | ✅ Done | `flutter analyze` → zero issues |
 | Phase 2 — Data Layer | ✅ Done | All models + repositories + build_runner, `flutter analyze` → zero issues |
-| Phase 3 — Auth Flow | ⬜ Not started | |
+| Phase 3 — Auth Flow | ✅ Done | Login, Register, Reset Password screens + providers, `flutter analyze` → zero issues |
 | Phase 4 — Dashboard | ⬜ Not started | |
 | Phase 5 — Booking Flow | ⬜ Not started | |
 | Phase 6 — My Bookings + Profile | ⬜ Not started | |
 | Phase 7 — Polish | ⬜ Not started | |
 
 ### Next action
-**Phase 3 — Auth Flow** (Login, Register, Reset Password screens + providers)
+**Phase 4 — Dashboard + Navigation Shell** (greeting, 3 action buttons, logout)
