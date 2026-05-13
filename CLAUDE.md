@@ -2,116 +2,76 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Build System and Commands
+## Build Commands
 
-**Gradle-based Android project** (Gradle 4.2.1, compileSdkVersion 30)
-
-### Key Build Commands
-- **Build debug APK**: `./gradlew assembleDebug`
-- **Build release APK**: `./gradlew assembleRelease`
-- **Run all tests**: `./gradlew test`
-- **Run unit tests only**: `./gradlew test --tests com.example.studytime.*`
-- **Run instrumented/Android tests**: `./gradlew connectedAndroidTest`
-- **Run lint checks**: `./gradlew lint`
-- **Clean build**: `./gradlew clean`
-- **Sync dependencies**: `./gradlew dependencies`
-
-**Build Configuration**:
-- Min SDK: 17
-- Target SDK: 30
-- Java 8 compatibility enabled
-- MultiDex enabled (supports large APKs)
-- AndroidX enabled with jetifier
-
-## Project Structure
-
-```
-app/src/main/
-├── java/com/example/studytime/      # Main source code (single flat package)
-├── res/
-│   ├── layout/                      # Activity and Fragment XML layouts
-│   ├── values/                      # Strings, colors, dimensions
-│   └── mipmap/                      # App icons
-└── AndroidManifest.xml              # Activity declarations
-
-app/src/test/                         # Unit tests (JUnit 4)
-app/src/androidTest/                 # Instrumented tests (Espresso)
+```bash
+./gradlew assembleDebug          # Build debug APK
+./gradlew assembleRelease        # Build release APK
+./gradlew test                   # Run unit tests
+./gradlew connectedAndroidTest   # Run instrumented tests (requires device/emulator)
+./gradlew lint                   # Run lint checks
+./gradlew clean                  # Clean build
 ```
 
-## Architecture Pattern: Basic Activity-Based MVC
+**Build config:** compileSdk 35, minSdk 24, targetSdk 35, Kotlin 1.9.22, AGP 8.2.2
 
-This is a **straightforward Activity-based architecture** with minimal abstraction. No formal MVP/MVVM pattern is implemented.
+## Architecture
 
-### Key Characteristics:
-1. **Activities as Controllers**: Each screen is an Activity that directly manages UI and business logic
-2. **No ViewModel or Presenter layer**: Activities handle Firebase calls and data binding directly
-3. **Static state sharing**: Activities use static methods to pass data between screens (e.g., `Salle.setChosen()`, `Booking.getPlace()`)
-4. **Fragment containers**: Some flows use Fragments (BookingStep1/2/3/4 fragments within BookingNew activity)
-5. **Listener interfaces**: Custom interfaces like `IAllBranchLoadListener`, `IAllSalleLoadListener`, `ITimeSlotLoadListener` for async callbacks
-6. **Adapter pattern**: RecyclerView adapters (`MyAdapter`, `MytimeSlotAdapter`) handle list rendering
+**Single-Activity MVVM** with Jetpack Navigation, Hilt DI, Kotlin Coroutines, and Firebase.
 
-### Screen/Feature Flow:
-- **Authentication**: MainActivity → login/Register/Reset (Firebase Auth)
-- **Main Dashboard**: Splashscreen_loading → Dash (home hub)
-- **Booking Flow**: Salle (choose study hall) → Booking (select table/position) → TimeActivity (pick time slot) → Confirmation
-- **User Management**: profil, manage (bookings), notif (notifications)
-- **Utility**: GroupSolo, DateActivity, CustomPopup (custom dialogs)
+```
+app/src/main/java/com/example/studytime/
+├── StudyTimeApp.kt              # Hilt @HiltAndroidApp application class
+├── MainActivity.kt              # Single activity — hosts NavHostFragment + Toolbar
+├── di/AppModule.kt              # Provides FirebaseAuth, FirebaseFirestore singletons
+├── data/
+│   ├── model/                   # Pure data classes: User, StudyHall, Booking, TimeSlot
+│   └── repository/              # AuthRepository, UserRepository, StudyHallRepository, BookingRepository
+├── ui/
+│   ├── auth/                    # LoginFragment, RegisterFragment, ResetPasswordFragment (+ ViewModels)
+│   ├── dashboard/               # DashboardFragment + DashboardViewModel
+│   ├── booking/                 # HallSelectionFragment, TableSelectionFragment, TimeSlotFragment,
+│   │                            # ConfirmationFragment — all share BookingViewModel via activityViewModels()
+│   ├── mybookings/              # MyBookingsFragment + ViewModel + BookingItemAdapter
+│   └── profile/                 # ProfileFragment + ProfileViewModel
+└── utils/
+    ├── Resource.kt              # Sealed class: Success<T>, Error, Loading
+    └── Extensions.kt            # View visibility helpers, TextInputLayout.setError(), EditText.trimText()
+```
 
-### Data Models:
-- **Users.java**: User profile (fullname, age, email)
-- **TimeSlot.java**: Time slot representation
-- **Salle.java**: Study hall/room
-- Helper/utility classes: Common.java (time conversions), MyAdapter.java (list rendering)
+## Key Patterns
 
-## Key Dependencies
+**State flow:** Every ViewModel exposes `StateFlow<Resource<T>?>`. Fragments collect it in `viewLifecycleOwner.lifecycleScope.launch { ... }`. `Resource.Loading` shows a ProgressBar; `Resource.Error` shows a Snackbar; `Resource.Success` updates the UI.
 
-### Firebase Suite (Backend)
-- `com.google.firebase:firebase-auth:20.0.2` — Email/password authentication
-- `com.google.firebase:firebase-database:19.6.0` — Realtime Database
-- `com.google.firebase:firebase-firestore:22.0.1` — Firestore (primary data store)
-- `com.google.gms:google-services:4.3.5` — Google Services plugin
+**Shared ViewModel across booking steps:** `BookingViewModel` is created at the activity scope via `activityViewModels()`. It holds `selectedHall`, `selectedTable`, `selectedSeat`, `selectedDate`, `selectedTimeSlot` as plain mutable properties set by each fragment as the user progresses through the flow.
 
-### UI Libraries
-- `androidx.appcompat:appcompat:1.2.0` — AppCompat support
-- `com.google.android.material:material:1.3.0` — Material Design components
-- `androidx.constraintlayout:constraintlayout:2.0.4` — ConstraintLayout for responsive UI
-- `androidx.viewpager:viewpager:1.0.0` — ViewPager for tabbed/swipe navigation
-- `com.airbnb.android:lottie:3.7.0` — Lottie animations
+**Repository pattern:** All Firebase calls live in repositories (`data/repository/`). They return `Resource<T>` using `try/catch` around `kotlinx.coroutines.tasks.await()`. ViewModels never touch Firebase directly.
 
-### Additional Libraries
-- `com.jakewharton:butterknife:10.2.3` — View binding (though not heavily used)
-- `com.shuhart.stepview:stepview:1.5.1` — Step indicator UI
-- `com.jaredrummler:material-spinner:1.3.1` — Material spinner
-- `devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4` — Horizontal calendar picker
-- `com.github.jhonnyx2012:horizontal-picker:1.0.6` — Time/date picker
-- `pl.droidsonroids.gif:android-gif-drawable:1.2.22` — GIF support
+**Navigation:** `res/navigation/nav_graph.xml` defines all routes. Auth screens pop back to `loginFragment` when navigating to dashboard so the back stack doesn't leak auth screens.
 
-## Test Setup
+## Firebase Data Model (Firestore)
 
-**Current Test Infrastructure**:
-- **Unit Tests**: `app/src/test/` with JUnit 4 (ExampleUnitTest.java as template)
-- **Instrumented Tests**: `app/src/androidTest/` with AndroidJUnit4 and Espresso (ExampleInstrumentedTest.java as template)
-- **Test Runner**: `androidx.test.runner.AndroidJUnitRunner`
+```
+users/{uid}          → User { uid, fullName, email, department }
+studyHalls/{id}      → StudyHall { id, name, location, capacity, tableCount }
+bookings/{id}        → Booking { userId, hallId, hallName, tableNumber, seatNumber,
+                                 date (ISO yyyy-MM-dd), timeSlotLabel, startHour,
+                                 durationMinutes, createdAt, status ("active"|"cancelled") }
+```
 
-**Important**: Both test directories contain only placeholder examples. No actual tests are implemented for the app's features.
+**Firestore indexes needed:** `bookings` collection requires a composite index on `(hallId, tableNumber, date, status)` and `(userId, createdAt DESC)` for the My Bookings query.
 
-## Important Architecture Notes
+## Localization
 
-1. **Static Data Passing**: Data flows between activities using static methods. This is fragile and should be replaced with Intent extras or a proper dependency injection/view model pattern for maintenance.
+English strings in `res/values/strings.xml`, French translations in `res/values-fr/strings.xml`. All user-facing text must go through string resources — no hardcoded strings in Kotlin or XML layouts.
 
-2. **Firebase Integration**: All data persistence and authentication goes through Firebase (Firestore, Realtime Database, Auth). No local database layer.
+## Dependencies (key)
 
-3. **Listener Callbacks**: Custom listener interfaces handle async Firebase callbacks instead of LiveData/RxJava, making threading harder to track.
-
-4. **Fragment Usage Limited**: Only used in the multi-step BookingNew flow with step indicators; most screens are Activities.
-
-5. **Resource Strings**: French language content throughout (activity names like "Salle", "Salon"; UI text in French). No i18n setup.
-
-## Development Notes
-
-- The app targets study space booking (reserving study halls/tables/time slots)
-- Firebase Firestore is the primary database; Real-time Database is used but may be legacy
-- No dependency injection framework (Dagger, Hilt) — dependencies are instantiated directly
-- No Kotlin usage; pure Java
-- Lottie animations used for loading states and interactive buttons
-
+| Library | Purpose |
+|---|---|
+| Hilt 2.50 | Dependency injection |
+| Navigation 2.7.6 | Fragment navigation |
+| Firebase BOM 32.7.0 | Auth + Firestore |
+| Coroutines + `kotlinx-coroutines-play-services` | Async Firebase calls via `.await()` |
+| Material 1.11.0 | UI components, MaterialDatePicker |
+| Lottie 6.3.0 | Animations (raw/ JSON assets kept from original) |
