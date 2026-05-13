@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StudyTime</string>
+
+    <!-- Auth -->
+    <string name="title_login">Se connecter</string>
+    <string name="title_register">Créer un compte</string>
+    <string name="title_reset_password">Réinitialiser le mot de passe</string>
+    <string name="hint_email">Adresse e-mail</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="hint_confirm_password">Confirmer le mot de passe</string>
+    <string name="hint_full_name">Nom complet</string>
+    <string name="hint_department">Département / Faculté</string>
+    <string name="btn_login">Se connecter</string>
+    <string name="btn_register">Créer un compte</string>
+    <string name="btn_send_reset">Envoyer le lien</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="no_account">Pas encore de compte ?</string>
+    <string name="sign_up">S\'inscrire</string>
+    <string name="already_have_account">Vous avez déjà un compte ?</string>
+    <string name="sign_in">Se connecter</string>
+    <string name="back_to_login">Retour à la connexion</string>
+    <string name="reset_instructions">Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.</string>
+    <string name="reset_email_sent">Lien envoyé ! Vérifiez votre boîte mail.</string>
+    <string name="logout">Se déconnecter</string>
+
+    <!-- Validation errors -->
+    <string name="error_field_required">Ce champ est obligatoire</string>
+    <string name="error_invalid_email">Entrez une adresse e-mail valide</string>
+    <string name="error_password_too_short">Le mot de passe doit contenir au moins 6 caractères</string>
+    <string name="error_passwords_dont_match">Les mots de passe ne correspondent pas</string>
+
+    <!-- Dashboard -->
+    <string name="greeting_default">Bon retour !</string>
+    <string name="greeting_name">Bonjour, %1$s !</string>
+    <string name="dashboard_subtitle">Où souhaitez-vous étudier aujourd\'hui ?</string>
+    <string name="btn_book_now">Réserver un espace</string>
+    <string name="book_now_desc">Trouvez et réservez votre place</string>
+
+    <!-- Booking flow -->
+    <string name="title_select_hall">Choisir une salle</string>
+    <string name="title_select_table">Sélectionner une table et une place</string>
+    <string name="title_select_time">Choisir un créneau horaire</string>
+    <string name="title_confirmation">Confirmer la réservation</string>
+    <string name="hall_capacity">Capacité : %1$d places</string>
+    <string name="select_table_prompt">Sélectionnez une table</string>
+    <string name="select_seat_prompt">Sélectionnez une place</string>
+    <string name="select_time_prompt">Sélectionnez un créneau pour continuer</string>
+    <string name="select_date">Date</string>
+    <string name="change">Modifier</string>
+    <string name="btn_continue">Continuer</string>
+    <string name="btn_confirm_booking">Confirmer la réservation</string>
+    <string name="btn_cancel">Annuler</string>
+    <string name="back_to_home">Retour à l\'accueil</string>
+
+    <string name="table_1">Table 1</string>
+    <string name="table_2">Table 2</string>
+    <string name="table_3">Table 3</string>
+    <string name="table_4">Table 4</string>
+    <string name="table_5">Table 5</string>
+    <string name="table_6">Table 6</string>
+    <string name="table_7">Table 7</string>
+    <string name="table_8">Table 8</string>
+    <string name="table_9">Table 9</string>
+    <string name="table_10">Table 10</string>
+    <string name="seat_1">P1</string>
+    <string name="seat_2">P2</string>
+    <string name="seat_3">P3</string>
+    <string name="seat_4">P4</string>
+    <string name="seat_5">P5</string>
+    <string name="seat_6">P6</string>
+    <string name="seat_7">P7</string>
+    <string name="seat_8">P8</string>
+
+    <string name="table_number">Table %1$d</string>
+    <string name="seat_number">Place %1$d</string>
+    <string name="booking_summary_header">%1$s · Table %2$d · Place %3$d · %4$s</string>
+    <string name="booking_summary_title">Récapitulatif de la réservation</string>
+    <string name="label_hall">Salle :</string>
+    <string name="label_table">Table :</string>
+    <string name="label_seat">Place :</string>
+    <string name="label_date">Date :</string>
+    <string name="label_time">Heure :</string>
+    <string name="booking_confirmed">Réservation confirmée !</string>
+    <string name="booking_confirmed_desc">Votre place a été réservée. À bientôt !</string>
+
+    <!-- My Bookings -->
+    <string name="title_my_bookings">Mes réservations</string>
+    <string name="no_bookings">Aucune réservation pour l\'instant.\nRéservez votre premier espace !</string>
+    <string name="cancel_booking">Annuler la réservation</string>
+    <string name="cancel_booking_title">Annuler la réservation</string>
+    <string name="cancel_booking_message">Êtes-vous sûr de vouloir annuler cette réservation ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="status_active">Active</string>
+    <string name="status_cancelled">Annulée</string>
+    <string name="booking_detail_summary">Table %1$d · Place %2$d\n%3$s · %4$s</string>
+
+    <!-- Profile -->
+    <string name="title_profile">Profil</string>
+    <string name="edit_profile">Modifier le profil</string>
+    <string name="save">Enregistrer</string>
+    <string name="profile_updated">Profil mis à jour avec succès</string>
+</resources>

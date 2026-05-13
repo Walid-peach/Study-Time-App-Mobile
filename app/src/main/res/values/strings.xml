@@ -1,21 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StudyTime</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
-    <string name="_8">8</string>
 
-    <string-array name="departement">
-        <item>Informatique</item>
-        <item>Mines</item>
-        <item>Electromécanique</item>
-        <item>Sciences de la terre</item>
-        <item>Génie des Procédés Industriels</item>
-        <item>Génie des Matériaux</item>
-    </string-array>
+    <!-- Auth -->
+    <string name="title_login">Sign In</string>
+    <string name="title_register">Create Account</string>
+    <string name="title_reset_password">Reset Password</string>
+    <string name="hint_email">Email address</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="hint_full_name">Full name</string>
+    <string name="hint_department">Department / Faculty</string>
+    <string name="btn_login">Sign In</string>
+    <string name="btn_register">Create Account</string>
+    <string name="btn_send_reset">Send Reset Link</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="back_to_login">Back to login</string>
+    <string name="reset_instructions">Enter your email address and we\'ll send you a link to reset your password.</string>
+    <string name="reset_email_sent">Reset link sent! Check your inbox.</string>
+    <string name="logout">Log out</string>
 
+    <!-- Validation errors -->
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_email">Enter a valid email address</string>
+    <string name="error_password_too_short">Password must be at least 6 characters</string>
+    <string name="error_passwords_dont_match">Passwords do not match</string>
+
+    <!-- Dashboard -->
+    <string name="greeting_default">Welcome back!</string>
+    <string name="greeting_name">Hey, %1$s!</string>
+    <string name="dashboard_subtitle">Where would you like to study today?</string>
+    <string name="btn_book_now">Book a Study Space</string>
+    <string name="book_now_desc">Find and reserve your spot</string>
+
+    <!-- Booking flow -->
+    <string name="title_select_hall">Choose a Study Hall</string>
+    <string name="title_select_table">Select Table &amp; Seat</string>
+    <string name="title_select_time">Pick a Time Slot</string>
+    <string name="title_confirmation">Confirm Booking</string>
+    <string name="hall_capacity">Capacity: %1$d seats</string>
+    <string name="select_table_prompt">Select a table</string>
+    <string name="select_seat_prompt">Select a seat</string>
+    <string name="select_time_prompt">Select a time slot to continue</string>
+    <string name="select_date">Date</string>
+    <string name="change">Change</string>
+    <string name="btn_continue">Continue</string>
+    <string name="btn_confirm_booking">Confirm Booking</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="back_to_home">Back to Home</string>
+
+    <string name="table_1">Table 1</string>
+    <string name="table_2">Table 2</string>
+    <string name="table_3">Table 3</string>
+    <string name="table_4">Table 4</string>
+    <string name="table_5">Table 5</string>
+    <string name="table_6">Table 6</string>
+    <string name="table_7">Table 7</string>
+    <string name="table_8">Table 8</string>
+    <string name="table_9">Table 9</string>
+    <string name="table_10">Table 10</string>
+    <string name="seat_1">S1</string>
+    <string name="seat_2">S2</string>
+    <string name="seat_3">S3</string>
+    <string name="seat_4">S4</string>
+    <string name="seat_5">S5</string>
+    <string name="seat_6">S6</string>
+    <string name="seat_7">S7</string>
+    <string name="seat_8">S8</string>
+
+    <string name="table_number">Table %1$d</string>
+    <string name="seat_number">Seat %1$d</string>
+    <string name="booking_summary_header">%1$s · Table %2$d · Seat %3$d · %4$s</string>
+    <string name="booking_summary_title">Booking Summary</string>
+    <string name="label_hall">Hall:</string>
+    <string name="label_table">Table:</string>
+    <string name="label_seat">Seat:</string>
+    <string name="label_date">Date:</string>
+    <string name="label_time">Time:</string>
+    <string name="booking_confirmed">Booking Confirmed!</string>
+    <string name="booking_confirmed_desc">Your spot has been reserved. See you there!</string>
+
+    <!-- My Bookings -->
+    <string name="title_my_bookings">My Bookings</string>
+    <string name="no_bookings">No bookings yet.\nBook your first study space!</string>
+    <string name="cancel_booking">Cancel Booking</string>
+    <string name="cancel_booking_title">Cancel Booking</string>
+    <string name="cancel_booking_message">Are you sure you want to cancel this booking?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="status_active">Active</string>
+    <string name="status_cancelled">Cancelled</string>
+    <string name="booking_detail_summary">Table %1$d · Seat %2$d\n%3$s · %4$s</string>
+
+    <!-- Profile -->
+    <string name="title_profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save">Save</string>
+    <string name="profile_updated">Profile updated successfully</string>
 </resources>
