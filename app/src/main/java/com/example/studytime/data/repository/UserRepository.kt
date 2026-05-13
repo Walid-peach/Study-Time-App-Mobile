@@ -1,6 +1,7 @@
 package com.example.studytime.data.repository
 
 import com.example.studytime.data.model.User
+import com.example.studytime.data.model.UserProfileUpdate
 import com.example.studytime.utils.Resource
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -28,8 +29,9 @@ class UserRepository @Inject constructor(private val db: FirebaseFirestore) {
         Resource.Error(e.message ?: "Could not load user")
     }
 
-    suspend fun updateUser(uid: String, updates: Map<String, Any>): Resource<Unit> = try {
-        usersCollection().document(uid).update(updates).await()
+    suspend fun updateProfile(uid: String, update: UserProfileUpdate): Resource<Unit> = try {
+        val fields = mapOf("fullName" to update.fullName, "department" to update.department)
+        usersCollection().document(uid).update(fields).await()
         Resource.Success(Unit)
     } catch (e: Exception) {
         Resource.Error(e.message ?: "Could not update user")

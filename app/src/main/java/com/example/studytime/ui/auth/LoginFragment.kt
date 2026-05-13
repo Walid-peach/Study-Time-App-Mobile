@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (viewModel.isLoggedIn()) {
-            findNavController().navigate(R.id.action_login_to_dashboard)
+            binding.root.post { findNavController().navigate(R.id.action_login_to_dashboard) }
             return
         }
 
