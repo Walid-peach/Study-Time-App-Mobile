@@ -1,15 +1,33 @@
+# Android build artefacts
 *.iml
-.gradle
+.gradle/
 /local.properties
-/.idea/caches
-/.idea/libraries
+local.properties
+/build/
+app/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# IntelliJ / Android Studio
+/.idea/caches/
+/.idea/libraries/
 /.idea/modules.xml
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+*.orig
+
+# Firebase — never commit
+google-services.json
+
+# Notes
+notes/
+
+# macOS
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+
+# Keystore — never commit signing keys
+*.jks
+*.keystore
+keystore.properties
