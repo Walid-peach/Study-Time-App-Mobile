@@ -3,6 +3,7 @@ package com.example.studytime.ui.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.studytime.data.model.User
+import com.example.studytime.data.model.UserProfileUpdate
 import com.example.studytime.data.repository.AuthRepository
 import com.example.studytime.data.repository.UserRepository
 import com.example.studytime.utils.Resource
@@ -38,8 +39,7 @@ class ProfileViewModel @Inject constructor(
         val uid = authRepo.currentUser?.uid ?: return
         viewModelScope.launch {
             _updateState.value = Resource.Loading
-            val updates = mapOf("fullName" to fullName, "department" to department)
-            _updateState.value = userRepo.updateUser(uid, updates)
+            _updateState.value = userRepo.updateProfile(uid, UserProfileUpdate(fullName, department))
             if (_updateState.value is Resource.Success) loadProfile()
         }
     }

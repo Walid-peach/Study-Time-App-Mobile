@@ -11,7 +11,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.example.studytime"
+        applicationId "com.walidelkhoukh.studytime"
         minSdk 24
         targetSdk 35
         versionCode 2
@@ -64,7 +64,6 @@ dependencies {
 
     // Lifecycle / ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
     // Coroutines
