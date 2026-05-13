@@ -26,7 +26,8 @@ class RegisterViewModel @Inject constructor(
             _registerState.value = Resource.Loading
             val authResult = authRepo.register(email, password)
             if (authResult !is Resource.Success) {
-                _registerState.value = Resource.Error("Registration failed")
+                _registerState.value = if (authResult is Resource.Error) authResult
+                                       else Resource.Error("Registration failed")
                 return@launch
             }
             val uid = authResult.data.uid

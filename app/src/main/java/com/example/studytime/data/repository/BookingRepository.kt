@@ -51,8 +51,15 @@ class BookingRepository @Inject constructor(private val db: FirebaseFirestore) {
     }
 
     suspend fun cancelBooking(bookingId: String): Resource<Unit> = try {
-        bookingsCollection().document(bookingId)
-            .update("status", Booking.STATUS_CANCELLED).await()
+        val bookingRef = bookingsCollection().document(bookingId)
+        val booking = bookingRef.get().await().toObject(Booking::class.java)
+            ?: throw Exception("Booking not found")
+        val slotKey = "${booking.hallId}_t${booking.tableNumber}_s${booking.seatNumber}_${booking.date}_h${booking.startHour}"
+        val slotRef = db.collection("bookedSlots").document(slotKey)
+        db.runTransaction { tx ->
+            tx.update(bookingRef, "status", Booking.STATUS_CANCELLED)
+            tx.delete(slotRef)
+        }.await()
         Resource.Success(Unit)
     } catch (e: Exception) {
         Resource.Error(e.message ?: "Could not cancel booking")
